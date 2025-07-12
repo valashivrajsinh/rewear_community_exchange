@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --color-background: #FEFEFE; /* pure white with subtle warmth */
+    --color-foreground: #2C3E50; /* dark blue-gray */
+    --color-border: #E5E7EB; /* light gray */
+    --color-input: #F8F9FA; /* light neutral */
+    --color-ring: #2D5A27; /* deep forest green */
+    --color-card: #FFFFFF; /* white */
+    --color-card-foreground: #2C3E50; /* dark blue-gray */
+    --color-popover: #FFFFFF; /* white */
+    --color-popover-foreground: #2C3E50; /* dark blue-gray */
+    --color-muted: #F8F9FA; /* light neutral */
+    --color-muted-foreground: #6C757D; /* medium gray */
+
+    /* Brand Colors */
+    --color-primary: #2D5A27; /* deep forest green */
+    --color-primary-foreground: #FFFFFF; /* white */
+    --color-secondary: #8B4513; /* warm saddle brown */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    --color-accent: #E67E22; /* energetic terracotta */
+    --color-accent-foreground: #FFFFFF; /* white */
+
+    /* Status Colors */
+    --color-success: #27AE60; /* natural green */
+    --color-success-foreground: #FFFFFF; /* white */
+    --color-warning: #F39C12; /* warm amber */
+    --color-warning-foreground: #FFFFFF; /* white */
+    --color-error: #E74C3C; /* confident red */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #E74C3C; /* confident red */
+    --color-destructive-foreground: #FFFFFF; /* white */
+
+    /* Surface Colors */
+    --color-surface: #F8F9FA; /* light neutral */
+    --color-surface-foreground: #2C3E50; /* dark blue-gray */
+
+    /* Text Colors */
+    --color-text-primary: #2C3E50; /* dark blue-gray */
+    --color-text-secondary: #6C757D; /* medium gray */
+
+    /* Border Radius */
+    --radius: 8px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-caption {
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Custom shadow system */
+  .shadow-soft {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-soft-hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Animation utilities */
+  .animate-scale-hover {
+    transition: transform 200ms ease-out;
+  }
+
+  .animate-scale-hover:hover {
+    transform: scale(1.02);
+  }
+
+  .animate-slide-in {
+    animation: slideIn 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    background-size: 200% 100%;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Gesture-friendly interactions */
+  .swipe-container {
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+
+  .swipe-item {
+    scroll-snap-align: start;
+  }
+}
+
+@layer utilities {
+  /* Spacing utilities following 16px base with 8px increments */
+  .space-micro {
+    @apply space-y-1; /* 4px */
+  }
+
+  .space-small {
+    @apply space-y-2; /* 8px */
+  }
+
+  .space-base {
+    @apply space-y-4; /* 16px */
+  }
+
+  .space-section {
+    @apply space-y-6; /* 24px */
+  }
+
+  /* Status-aware component utilities */
+.status-available  {
+    @apply text-success;
+  }
+.status-pending  {
+    @apply text-warning;
+  }
+
+  .status-swapped {
+    @apply bg-muted text-muted-foreground border-border;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-scale-hover,
+    .animate-slide-in,
+    .animate-shimmer {
+      animation: none;
+      transition: none;
+    }
+  }
+}
